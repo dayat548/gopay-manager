@@ -80,9 +80,9 @@ def sendWallet(qrcode, token, pin, uniqueid):
     req = requests.post(base_url+"/v2/fund/transfer", data=data.encode('utf-8'), headers=headers).text
     jsonq = json.loads(req)
     if jsonq["success"] == True:
-        return "Success send gopay :)"
+        return "Success send balance GoPay :)"
     else:
-        return "Failed send gopay | %s"%(jsonq["errors"][0]["message"])
+        return "Failed send balance GoPay | %s"%(jsonq["errors"][0]["message"])
 
 def sendWalletOtherAmount(qrcode, token, pin, uniqueid, amount):
     headers["Authorization"] = "Bearer %s"%(token)
@@ -92,9 +92,9 @@ def sendWalletOtherAmount(qrcode, token, pin, uniqueid, amount):
     req = requests.post(base_url+"/v2/fund/transfer", data=data.encode('utf-8'), headers=headers).text
     jsonq = json.loads(req)
     if jsonq["success"] == True:
-        return "Success send gopay :)"
+        return "Success send balance GoPay :)"
     else:
-        return "Failed send gopay | %s"%(jsonq["errors"][0]["message"])
+        return "Failed send balance GoPay | %s"%(jsonq["errors"][0]["message"])
 
 def checkBalance(token, uniqueid):
     headers["Authorization"] = "Bearer %s"%(token)
@@ -102,7 +102,7 @@ def checkBalance(token, uniqueid):
     req = requests.get(base_url+"/wallet/profile", headers=headers).text
     jsonq = json.loads(req)
     if jsonq["success"] == True:
-        print("Your balance is Rp.%s"%jsonq["data"]["balance"])
+        print("Your have balance Rp.%s"%jsonq["data"]["balance"])
         return True
     else:
         return False
@@ -139,19 +139,19 @@ with open('config.json') as fp:
 print(banner)
 if  config == []:
     configname = input('Enter name config: ')
-    number = input('Enter number (62xxx or 1xxx): ')
+    number = input('Enter your number (62xxx or 1xxx): ')
     otptoken = sendOtp(number)
     if otptoken == False:
         sys.exit(0)
     else:
-        otp_log = input('Enter OTP: ')
-        pin_log = input('Enter PIN: ')
+        otp_log = input('Enter a OTP: ')
+        pin_log = input('Enter a PIN: ')
         login_log = login(otptoken, otp_log, configname, pin_log)
         if login_log == True:
             restart()
 else:
     print(menu)
-    menu_log = input('Select menu: ')
+    menu_log = input('Please select menu: ')
     if menu_log == "1":
         no = 0
         username = ""
